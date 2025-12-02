@@ -1,6 +1,6 @@
 package org.example.controller;
 
-import org.example.models.Empleado;
+import org.example.models.EmpleadoDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +22,9 @@ public class ControladorEmpleado {
 
     // Crear un empleado
     @PostMapping
-    public ResponseEntity<Empleado> save(@RequestBody Empleado empleado) {
+    public ResponseEntity<EmpleadoDTO> save(@RequestBody EmpleadoDTO empleado) {
         try {
-            Empleado empleadoCreado = empleadoService.crearEmpleado(empleado);
+            EmpleadoDTO empleadoCreado = empleadoService.crearEmpleado(empleado);
             return ResponseEntity.status(HttpStatus.CREATED).body(empleadoCreado);
         } catch (Exception e) {
             // Log de error
@@ -34,13 +34,16 @@ public class ControladorEmpleado {
 
     // Obtener todos los empleados
     @GetMapping
-    public ResponseEntity<List<Empleado>> findAll() {
+    public List<EmpleadoDTO> findAll() {
+        System.out.println(">>> Entrando a /api/empleados <<<");
         try {
-            List<Empleado> empleados = empleadoService.findAll();
-            return ResponseEntity.ok(empleados);
+            List<EmpleadoDTO> empleados = empleadoService.findAll();
+            System.out.println(">>> Empleados recuperados: " + empleados);
+            return empleados;
         } catch (Exception e) {
-            // Log de error
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyList());
+            e.printStackTrace(); // <<<< Esto imprimirá la causa real del error
+            throw e; // Volvemos a lanzar la excepción para que Spring la maneje
         }
     }
 }
+

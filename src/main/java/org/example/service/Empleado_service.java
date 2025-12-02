@@ -1,5 +1,5 @@
 package org.example.service;
-import org.example.models.Empleado;
+import org.example.models.EmpleadoDTO;
 import org.springframework.stereotype.Service;
 import org.example.repository.Repositorio_empleado;
 
@@ -19,11 +19,11 @@ public class Empleado_service {
         this.repositorio_empleado = repositorio_empleado;
     }
 
-    public Empleado crearEmpleado(Empleado empleado) {
+    public EmpleadoDTO crearEmpleado(EmpleadoDTO empleado) {
         return repositorio_empleado.save(empleado);
     }
 
-    public List<Empleado> findAll() {
+    public List<EmpleadoDTO> findAll() {
         return repositorio_empleado.findAll();
     }
 

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "empleados")
-public class Empleado {
+public class EmpleadoDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_empleado")
@@ -34,7 +34,7 @@ public class Empleado {
     private BigDecimal salario_hora;
 
     @Column(name="estado")
-    private boolean estado;
+    private Boolean estado; //
 
     public Long getId_empleado() {
         return id_empleado;
@@ -47,7 +47,9 @@ public class Empleado {
     public boolean isEstado() {
         return estado;
     }
-
+    public Boolean getEstado() {
+        return estado != null ? estado : true; // nunca devuelve null
+    }
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
