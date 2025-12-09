@@ -5,8 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.example.service.Empleado_service;
-import java.util.Collections;
-
+import java.util.Optional;
 import java.util.List;
 
 @RestController
@@ -43,6 +42,36 @@ public class ControladorEmpleado {
         } catch (Exception e) {
             e.printStackTrace(); // <<<< Esto imprimirá la causa real del error
             throw e; // Volvemos a lanzar la excepción para que Spring la maneje
+        }
+    }
+
+    //Eliminar un empleado
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        // Llama al servicio para intentar eliminar
+        boolean eliminado = empleadoService.eliminarEmpleado(id);
+
+        if (eliminado) {
+            // Código 204: No Content. Éxito, pero no hay cuerpo de respuesta.
+            return ResponseEntity.noContent().build();
+        } else {
+            // Código 404: Not Found. El empleado con ese ID no existe.
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    //Actualizar un empleado
+    @PutMapping("/{id}")
+    public ResponseEntity<EmpleadoDTO> updateEmpleado(@PathVariable Long id, @RequestBody EmpleadoDTO empleadoDetails) {
+
+        Optional<EmpleadoDTO> empleadoActualizado = empleadoService.actualizarEmpleado(id, empleadoDetails);
+
+        if (empleadoActualizado.isPresent()) {
+            // Código 200: OK. La actualización fue exitosa.
+            return ResponseEntity.ok(empleadoActualizado.get());
+        } else {
+            // Código 404: Not Found. El empleado a actualizar no existe.
+            return ResponseEntity.notFound().build();
         }
     }
 }
