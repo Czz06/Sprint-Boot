@@ -14,7 +14,6 @@ public class ControladorEmpleado {
 
     private final Empleado_service empleadoService;
 
-    // Inyección por constructor (recomendado en lugar de @Autowired en el campo)
     public ControladorEmpleado(Empleado_service empleadoService) {
         this.empleadoService = empleadoService;
     }
@@ -40,7 +39,7 @@ public class ControladorEmpleado {
             System.out.println(">>> Empleados recuperados: " + empleados);
             return empleados;
         } catch (Exception e) {
-            e.printStackTrace(); // <<<< Esto imprimirá la causa real del error
+            e.printStackTrace(); // Causa del error
             throw e; // Volvemos a lanzar la excepción para que Spring la maneje
         }
     }
@@ -52,10 +51,10 @@ public class ControladorEmpleado {
         boolean eliminado = empleadoService.eliminarEmpleado(id);
 
         if (eliminado) {
-            // Código 204: No Content. Éxito, pero no hay cuerpo de respuesta.
+            // Código No Content.
             return ResponseEntity.noContent().build();
         } else {
-            // Código 404: Not Found. El empleado con ese ID no existe.
+            // CódigoNot Found. El empleado no existe.
             return ResponseEntity.notFound().build();
         }
     }
@@ -67,10 +66,10 @@ public class ControladorEmpleado {
         Optional<EmpleadoDTO> empleadoActualizado = empleadoService.actualizarEmpleado(id, empleadoDetails);
 
         if (empleadoActualizado.isPresent()) {
-            // Código 200: OK. La actualización fue exitosa.
+            // Código OK. La actualización fue exitosa
             return ResponseEntity.ok(empleadoActualizado.get());
         } else {
-            // Código 404: Not Found. El empleado a actualizar no existe.
+            // Código Not Found
             return ResponseEntity.notFound().build();
         }
     }

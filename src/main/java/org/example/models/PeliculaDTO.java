@@ -107,8 +107,7 @@ public class PeliculaDTO {
         this.fecha_estreno = fecha_estreno;
     }
 
-    public Integer getPopularidad() {
-        return popularidad;
+    public Integer getPopularidad() {return popularidad;
     }
 
     public void setPopularidad(Integer popularidad) {

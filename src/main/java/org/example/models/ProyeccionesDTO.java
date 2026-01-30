@@ -1,6 +1,8 @@
 package org.example.models;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name="proyecciones")
@@ -18,13 +20,13 @@ public class ProyeccionesDTO {
     private int id_sala;
 
     @Column(name="fecha_hora_inicio")
-    private String fecha_hora_inicio;
+    private LocalDateTime fecha_hora_inicio; // CAMBIADO de String
 
     @Column(name="fecha_hora_fin")
-    private String fecha_hora_fin;
+    private LocalDateTime fecha_hora_fin;     // CAMBIADO de String
 
     @Column(name="precio_entrada")
-    private double precio_entrada;
+    private BigDecimal precio_entrada;
 
     @Column(name="asientos_disponibles")
     private int asientos_disponibles;
@@ -45,12 +47,20 @@ public class ProyeccionesDTO {
         this.id_sala = id_sala;
     }
 
-    public String getFecha_hora_inicio() {
+    public LocalDateTime getFecha_hora_inicio() {
         return fecha_hora_inicio;
     }
 
-    public void setFecha_hora_inicio(String fecha_hora_inicio) {
+    public void setFecha_hora_inicio(LocalDateTime fecha_hora_inicio) {
         this.fecha_hora_inicio = fecha_hora_inicio;
+    }
+
+    public LocalDateTime getFecha_hora_fin() {
+        return fecha_hora_fin;
+    }
+
+    public void setFecha_hora_fin(LocalDateTime fecha_hora_fin) {
+        this.fecha_hora_fin = fecha_hora_fin;
     }
 
     public int getId_pelicula() {
@@ -69,19 +79,11 @@ public class ProyeccionesDTO {
         this.asientos_disponibles = asientos_disponibles;
     }
 
-    public String getFecha_hora_fin() {
-        return fecha_hora_fin;
-    }
-
-    public void setFecha_hora_fin(String fecha_hora_fin) {
-        this.fecha_hora_fin = fecha_hora_fin;
-    }
-
-    public double getPrecio_entrada() {
+    public BigDecimal getPrecio_entrada() {
         return precio_entrada;
     }
 
-    public void setPrecio_entrada(double precio_entrada) {
+    public void setPrecio_entrada(BigDecimal precio_entrada) {
         this.precio_entrada = precio_entrada;
     }
 }

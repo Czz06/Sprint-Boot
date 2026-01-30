@@ -16,17 +16,17 @@ public class Proyeccion_service {
         this.repositorioProyecciones = repositorioProyecciones;
     }
 
-    // --- 1. AÑADIR (CREAR) ---
+    // AÑADIR
     public ProyeccionesDTO crearProyeccion(ProyeccionesDTO proyeccion) {
         return repositorioProyecciones.save(proyeccion);
     }
 
-    // --- 2. SELECCIONAR TODO (LEER) ---
+    //SELECCIONAR TODO
     public List<ProyeccionesDTO> findAll() {
         return repositorioProyecciones.findAll();
     }
 
-    // --- 3. ELIMINAR ---
+    //ELIMINAR
     public boolean eliminarProyeccion(Integer id) {
         // Verifica si la proyección existe antes de eliminar
         if (repositorioProyecciones.existsById(id)) {
@@ -37,7 +37,7 @@ public class Proyeccion_service {
         }
     }
 
-    // --- 4. ACTUALIZAR ---
+    // ACTUALIZAR
     public Optional<ProyeccionesDTO> actualizarProyeccion(Integer id, ProyeccionesDTO detallesProyeccion) {
         // Buscar la proyección existente por su ID
         Optional<ProyeccionesDTO> proyeccionExistente = repositorioProyecciones.findById(id);

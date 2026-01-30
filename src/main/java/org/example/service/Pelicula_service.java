@@ -17,18 +17,18 @@ public class Pelicula_service {
         this.repositorioPelicula = repositorioPelicula;
     }
 
-    // --- 1. AÑADIR (CREAR) ---
+    //AÑADIR
     public PeliculaDTO crearPelicula(PeliculaDTO pelicula) {
         // Al guardar, JPA usará el ID para determinar si es un INSERT o un UPDATE (si el ID ya existe)
         return repositorioPelicula.save(pelicula);
     }
 
-    // --- 2. SELECCIONAR TODO (LEER) ---
+    //SELECCIONAR TODO
     public List<PeliculaDTO> findAll() {
         return repositorioPelicula.findAll();
     }
 
-    // --- 3. ELIMINAR ---
+    //ELIMINAR
     public boolean eliminarPelicula(Long id) {
         // Verificar si la película existe antes de intentar eliminar
         if (repositorioPelicula.existsById(id)) {
@@ -39,7 +39,7 @@ public class Pelicula_service {
         }
     }
 
-    // --- 4. ACTUALIZAR ---
+    //ACTUALIZAR
     public Optional<PeliculaDTO> actualizarPelicula(Long id, PeliculaDTO detallesPelicula) {
         // Buscar la película existente por su ID
         Optional<PeliculaDTO> peliculaExistente = repositorioPelicula.findById(id);

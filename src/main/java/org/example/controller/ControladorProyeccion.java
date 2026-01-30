@@ -19,44 +19,44 @@ public class ControladorProyeccion {
         this.proyeccionesService = proyeccionesService;
     }
 
-    // --- 1. AÑADIR (POST) ---
+    // AÑADIR
     @PostMapping
     public ResponseEntity<ProyeccionesDTO> save(@RequestBody ProyeccionesDTO proyeccion) {
         ProyeccionesDTO proyeccionCreada = proyeccionesService.crearProyeccion(proyeccion);
-        // Respuesta 201 Created
+        // Respuesta Created
         return ResponseEntity.status(HttpStatus.CREATED).body(proyeccionCreada);
     }
 
-    // --- 2. SELECCIONAR TODO (GET) ---
+    // SELECCIONAR TODO
     @GetMapping
     public List<ProyeccionesDTO> findAll() {
         return proyeccionesService.findAll();
     }
 
-    // --- 3. ELIMINAR (DELETE) ---
+    // ELIMINAR
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
         boolean eliminado = proyeccionesService.eliminarProyeccion(id);
 
         if (eliminado) {
-            // Respuesta 204 No Content
+            // Respuesta No Content
             return ResponseEntity.noContent().build();
         } else {
-            // Respuesta 404 Not Found
+            // Respuesta Not Found
             return ResponseEntity.notFound().build();
         }
     }
 
-    // --- 4. ACTUALIZAR (PUT) ---
+    //ACTUALIZAR
     @PutMapping("/{id}")
     public ResponseEntity<ProyeccionesDTO> updateProyeccion(@PathVariable Integer id, @RequestBody ProyeccionesDTO proyeccionDetails) {
         Optional<ProyeccionesDTO> proyeccionActualizada = proyeccionesService.actualizarProyeccion(id, proyeccionDetails);
 
         if (proyeccionActualizada.isPresent()) {
-            // Respuesta 200 OK
+            // Respuesta OK
             return ResponseEntity.ok(proyeccionActualizada.get());
         } else {
-            // Respuesta 404 Not Found
+            // Respuesta Not Found
             return ResponseEntity.notFound().build();
         }
     }

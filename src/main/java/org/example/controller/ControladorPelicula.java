@@ -20,7 +20,7 @@ public class ControladorPelicula {
         this.peliculaService = peliculaService;
     }
 
-    // --- 1. AÑADIR (POST) ---
+    //Añadir
     @PostMapping
     public ResponseEntity<PeliculaDTO> save(@RequestBody PeliculaDTO pelicula) {
         PeliculaDTO peliculaCreada = peliculaService.crearPelicula(pelicula);
@@ -28,36 +28,36 @@ public class ControladorPelicula {
         return ResponseEntity.status(HttpStatus.CREATED).body(peliculaCreada);
     }
 
-    // --- 2. SELECCIONAR TODO (GET) ---
+    //SELECCIONAR TODO
     @GetMapping
     public List<PeliculaDTO> findAll() {
         return peliculaService.findAll();
     }
 
-    // --- 3. ELIMINAR (DELETE) ---
+    // ELIMINAR
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         boolean eliminado = peliculaService.eliminarPelicula(id);
 
         if (eliminado) {
-            // Respuesta 204 No Content (Éxito sin cuerpo de respuesta)
+            // Respuesta No Content
             return ResponseEntity.noContent().build();
         } else {
-            // Respuesta 404 Not Found
+            // Respuesta Not Found
             return ResponseEntity.notFound().build();
         }
     }
 
-    // --- 4. ACTUALIZAR (PUT) ---
+    // ACTUALIZAR
     @PutMapping("/{id}")
     public ResponseEntity<PeliculaDTO> updatePelicula(@PathVariable Long id, @RequestBody PeliculaDTO peliculaDetails) {
         Optional<PeliculaDTO> peliculaActualizada = peliculaService.actualizarPelicula(id, peliculaDetails);
 
         if (peliculaActualizada.isPresent()) {
-            // Respuesta 200 OK
+            // Respuesta OK
             return ResponseEntity.ok(peliculaActualizada.get());
         } else {
-            // Respuesta 404 Not Found
+            // Respuesta Not Found
             return ResponseEntity.notFound().build();
         }
     }
